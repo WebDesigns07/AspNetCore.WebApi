@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +32,14 @@ namespace WebApi
         {
             services.AddDbContext<ApiDbContext>(ops =>
                 ops.UseInMemoryDatabase("ApiDatabase"));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(
+                    JwtBearerDefaults.AuthenticationScheme, 
+                    options => Configuration.Bind("JwtSettings", options))
+                .AddCookie(
+                    CookieAuthenticationDefaults.AuthenticationScheme, 
+                    options => Configuration.Bind("CookieSettings", options));
 
             services.AddControllers();
         }
