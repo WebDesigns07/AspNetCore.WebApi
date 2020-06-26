@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,12 @@ namespace WebApi.Controllers
     {
         private readonly ApiDbContext _context;
 
-        public WeathersController(ApiDbContext context)
+        private readonly IAuthenticationService _authService;
+
+        public WeathersController(ApiDbContext context, IAuthenticationService authService)
         {
             _context = context;
+            _authService = authService;
         }
 
         // GET: api/Weathers
