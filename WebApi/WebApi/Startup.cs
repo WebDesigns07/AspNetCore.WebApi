@@ -40,7 +40,7 @@ namespace WebApi
                 .AddCookie(
                     CookieAuthenticationDefaults.AuthenticationScheme, 
                     options => Configuration.Bind("CookieSettings", options));
-
+            
             services.AddControllers();
         }
 
@@ -56,6 +56,8 @@ namespace WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -66,7 +68,6 @@ namespace WebApi
             using (var dbContext = sp.GetService<ApiDbContext>())
             {
                 dbContext.Database.EnsureCreated();
-
                 if (dbContext.Weather.Count() <= 0)
                 {
                     string[] Summaries = new[]

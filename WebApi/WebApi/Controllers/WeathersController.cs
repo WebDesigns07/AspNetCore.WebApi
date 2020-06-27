@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApi.Authentication;
 using WebApi.Data;
 using WebApi.Models;
 
@@ -13,6 +14,7 @@ namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AuthorizeToken]
     public class WeathersController : ControllerBase
     {
         private readonly ApiDbContext _context;
