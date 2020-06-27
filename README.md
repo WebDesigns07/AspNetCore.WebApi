@@ -10,3 +10,9 @@ Example:
 
     Jwt Authentication Forbid:
         A JWT bearer scheme returning a 403 result.
+
+Scaffold:
+    dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+    dotnet aspnet-codegenerator identity -dc WebApp1.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.Logout"
+
+To gain full control of the database schema, inherit from one of the available Identity DbContext classes and configure the context to include the Identity schema by calling builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value) on the OnModelCreating method.
